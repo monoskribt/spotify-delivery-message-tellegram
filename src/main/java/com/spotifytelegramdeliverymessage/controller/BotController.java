@@ -3,10 +3,8 @@ package com.spotifytelegramdeliverymessage.controller;
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
-import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
@@ -41,16 +39,23 @@ public class BotController extends TelegramLongPollingBot {
         String id = update.getMessage().getChatId().toString();
         String username = update.getMessage().getChat().getUserName();
 
-        if(message.startsWith(START)) {
+
+
+        if (message.startsWith(START)) {
             try {
                 botService.sendWelcomeMessage(id, username);
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
-        }
-        else if(message.startsWith(SUBSCRIBE)) {
+        } else if (message.startsWith(SUBSCRIBE)) {
             try {
-                botService.subscribe(id, username, message);
+                botService.subscribe(id, message);
+            } catch (TelegramApiException e) {
+                throw new RuntimeException(e);
+            }
+        } else if (message.startsWith(CONFIRM)) {
+            try {
+                botService.confirmation(id, username, message);
             } catch (TelegramApiException e) {
                 throw new RuntimeException(e);
             }
