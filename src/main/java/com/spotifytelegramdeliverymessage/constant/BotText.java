@@ -4,7 +4,7 @@ public class BotText {
 
     public static final String START_TEXT = "Welcome on Spotify Telegram Bot. " +
             "Here you will receive information about new releases of artists you are subscribed to." +
-            "In order to receive this information you need to enter 'subscribe' command and your email. \n" +
+            "In order to receive this information you need to enter 'subscribe' command and your email which is linked to the Spotify App. \n" +
             "Example: /subscribe example@example.com";
 
     public static final String CONFIRMATION_TEXT = """

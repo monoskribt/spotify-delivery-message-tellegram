@@ -3,6 +3,7 @@ package com.spotifytelegramdeliverymessage.service.impl;
 
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.constant.BotText;
+import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.EmailService;
@@ -16,6 +17,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class BotServiceImpl implements BotService {
@@ -30,7 +32,6 @@ public class BotServiceImpl implements BotService {
     @Autowired
     private EmailService emailService;
 
-    private final Map<String, Integer> confirmationCodeMap = new HashMap<>();
     private final Map<String, String> emailByChatId = new HashMap<>();
 
     @Override
@@ -39,31 +40,34 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
-    public void subscribe(String id, String message) throws TelegramApiException {
+    public void subscribe(String id, String username, String message) throws TelegramApiException {
         String email = message.replace(BotCommands.SUBSCRIBE, "").trim();
         int confirmationCode = emailService.generateConfirmationCode();
 
-        confirmationCodeMap.put(id, confirmationCode);
-        emailByChatId.put(id, email);
+        User user = new User(id, username);
+        user.setCode(String.valueOf(confirmationCode));
+        userService.save(user);
 
-        System.out.println(confirmationCode);
+        emailByChatId.put(id, email);
 
         emailService.sendConfirmationEmail(email, confirmationCode);
         sendMessage(id, BotText.CONFIRMATION_TEXT);
+
+        System.out.println(confirmationCode);
     }
 
     @Override
     public void confirmation(String id, String username, String message) throws TelegramApiException {
         String enteredConfirmationCode = message.replace(BotCommands.CONFIRM, "").trim();
 
-        if(checkCode(enteredConfirmationCode, String.valueOf(confirmationCodeMap.get(id)))) {
+        if(checkCode(enteredConfirmationCode, userService.getCode(id))) {
             String email = emailByChatId.get(id);
 
-            User user = new User(id, username);
-            user.setEmail(email);
-            userService.save(user);
+            Optional<User> user = userService.findById(id);
+            user.get().setEmail(email);
+            user.get().setSubscribeUserStatus(SubscribeUserStatus.SUBSCRIBE);
+            userService.save(user.get());
 
-            confirmationCodeMap.remove(id);
             emailByChatId.remove(id);
 
             sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);

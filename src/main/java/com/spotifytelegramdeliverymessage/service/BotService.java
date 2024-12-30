@@ -6,7 +6,7 @@ public interface BotService {
 
     void sendWelcomeMessage(String id, String username) throws TelegramApiException;
 
-    void subscribe(String id, String email) throws TelegramApiException;
+    void subscribe(String id, String username, String message) throws TelegramApiException;
 
     void confirmation(String id, String username, String message) throws TelegramApiException;
 

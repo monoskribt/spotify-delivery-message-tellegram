@@ -3,6 +3,7 @@ package com.spotifytelegramdeliverymessage.controller;
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
+import lombok.SneakyThrows;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -29,6 +30,7 @@ public class BotController extends TelegramLongPollingBot {
 
 
 
+    @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
         if(!update.hasMessage() || !update.getMessage().hasText()) {
@@ -40,25 +42,16 @@ public class BotController extends TelegramLongPollingBot {
         String username = update.getMessage().getChat().getUserName();
 
 
-
-        if (message.startsWith(START)) {
-            try {
+        try {
+            if (message.startsWith(START)) {
                 botService.sendWelcomeMessage(id, username);
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (message.startsWith(SUBSCRIBE)) {
-            try {
-                botService.subscribe(id, message);
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
-            }
-        } else if (message.startsWith(CONFIRM)) {
-            try {
+            } else if (message.startsWith(SUBSCRIBE)) {
+                botService.subscribe(id, username, message);
+            } else if (message.startsWith(CONFIRM)) {
                 botService.confirmation(id, username, message);
-            } catch (TelegramApiException e) {
-                throw new RuntimeException(e);
             }
+        } catch (TelegramApiException e) {
+            System.err.println("Something is wrong: " + e.getMessage());
         }
     }
 }
