@@ -3,6 +3,8 @@ package com.spotifytelegramdeliverymessage.controller;
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import lombok.SneakyThrows;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -15,6 +17,8 @@ public class BotController extends TelegramLongPollingBot {
 
     private final BotProps botProps;
     private final BotService botService;
+
+    private static final Logger logger = LoggerFactory.getLogger(BotController.class);
 
     public BotController(BotProps botProps, BotService botService) {
         super(botProps.token());
@@ -50,7 +54,7 @@ public class BotController extends TelegramLongPollingBot {
                 botService.confirmation(id, username, message);
             }
         } catch (TelegramApiException e) {
-            System.err.println("Something is wrong: " + e.getMessage());
+            logger.error("Somethings is wrong: {}", e.getMessage(), e);
         }
     }
 }

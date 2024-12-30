@@ -1,6 +1,5 @@
 package com.spotifytelegramdeliverymessage.service.impl;
 
-import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
 import com.spotifytelegramdeliverymessage.exception.UserNotFoundException;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.repository.UserRepository;

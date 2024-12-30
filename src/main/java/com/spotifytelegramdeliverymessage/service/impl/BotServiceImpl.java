@@ -1,10 +1,10 @@
 package com.spotifytelegramdeliverymessage.service.impl;
 
 
-import com.spotifytelegramdeliverymessage.constant.AccountStatus;
+import com.spotifytelegramdeliverymessage.enums.AccountStatus;
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.constant.BotText;
-import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
+import com.spotifytelegramdeliverymessage.enums.SubscribeUserStatus;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.EmailService;
@@ -16,8 +16,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Optional;
 
 @Service

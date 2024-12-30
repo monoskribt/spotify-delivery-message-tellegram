@@ -1,7 +1,6 @@
 package com.spotifytelegramdeliverymessage.service;
 
 
-import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
 import com.spotifytelegramdeliverymessage.model.User;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.spotifytelegramdeliverymessage.constant;
+package com.spotifytelegramdeliverymessage.enums;
 
 public enum SubscribeUserStatus {
 

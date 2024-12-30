@@ -1,7 +1,7 @@
 package com.spotifytelegramdeliverymessage.model;
 
-import com.spotifytelegramdeliverymessage.constant.AccountStatus;
-import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
+import com.spotifytelegramdeliverymessage.enums.AccountStatus;
+import com.spotifytelegramdeliverymessage.enums.SubscribeUserStatus;
 import jakarta.persistence.*;
 
 
