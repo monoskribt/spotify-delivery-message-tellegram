@@ -1,6 +1,7 @@
 package com.spotifytelegramdeliverymessage.service.impl;
 
 
+import com.spotifytelegramdeliverymessage.constant.AccountStatus;
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.constant.BotText;
 import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
@@ -32,8 +33,6 @@ public class BotServiceImpl implements BotService {
     @Autowired
     private EmailService emailService;
 
-    private final Map<String, String> emailByChatId = new HashMap<>();
-
     @Override
     public void sendWelcomeMessage(String id, String username) throws TelegramApiException {
         sendMessage(id, BotText.START_TEXT);
@@ -45,10 +44,9 @@ public class BotServiceImpl implements BotService {
         int confirmationCode = emailService.generateConfirmationCode();
 
         User user = new User(id, username);
+        user.setEmail(email);
         user.setCode(String.valueOf(confirmationCode));
         userService.save(user);
-
-        emailByChatId.put(id, email);
 
         emailService.sendConfirmationEmail(email, confirmationCode);
         sendMessage(id, BotText.CONFIRMATION_TEXT);
@@ -61,14 +59,11 @@ public class BotServiceImpl implements BotService {
         String enteredConfirmationCode = message.replace(BotCommands.CONFIRM, "").trim();
 
         if(checkCode(enteredConfirmationCode, userService.getCode(id))) {
-            String email = emailByChatId.get(id);
 
             Optional<User> user = userService.findById(id);
-            user.get().setEmail(email);
             user.get().setSubscribeUserStatus(SubscribeUserStatus.SUBSCRIBE);
+            user.get().setAccountStatus(AccountStatus.CONFIRMED);
             userService.save(user.get());
-
-            emailByChatId.remove(id);
 
             sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);
         }

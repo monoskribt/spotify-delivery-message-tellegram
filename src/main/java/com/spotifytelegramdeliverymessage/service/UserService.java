@@ -12,7 +12,5 @@ public interface UserService {
 
     Optional<User> findById(String id);
 
-    void setSubscriptionStatus(String id, SubscribeUserStatus status);
-
     String getCode(String id);
 }

@@ -1,5 +1,6 @@
 package com.spotifytelegramdeliverymessage.model;
 
+import com.spotifytelegramdeliverymessage.constant.AccountStatus;
 import com.spotifytelegramdeliverymessage.constant.SubscribeUserStatus;
 import jakarta.persistence.*;
 
@@ -21,6 +22,10 @@ public class User {
     private SubscribeUserStatus subscribeUserStatus = SubscribeUserStatus.UNSUBSCRIBE;
 
     private String code;
+
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false, columnDefinition = "varchar(255) default 'NOT_CONFIRMED'")
+    private AccountStatus accountStatus = AccountStatus.NOT_CONFIRMED;
 
     public User(String id, String username) {
         this.id = id;
@@ -49,6 +54,10 @@ public class User {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public void setAccountStatus(AccountStatus accountStatus) {
+        this.accountStatus = accountStatus;
     }
 
     public String getCode() {

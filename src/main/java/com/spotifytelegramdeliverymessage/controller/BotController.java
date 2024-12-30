@@ -1,6 +1,5 @@
 package com.spotifytelegramdeliverymessage.controller;
 
-import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import lombok.SneakyThrows;

@@ -6,7 +6,6 @@ import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.repository.UserRepository;
 import com.spotifytelegramdeliverymessage.service.UserService;
 import lombok.AllArgsConstructor;
-import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -29,12 +28,6 @@ public class UserServiceImpl implements UserService {
         return Optional.of(userRepository
                 .findById(id))
                 .orElseThrow(() -> new UserNotFoundException("User is not present with id: " + id));
-    }
-
-    @Override
-    public void setSubscriptionStatus(String id, SubscribeUserStatus status) {
-        Optional<User> user = findById(id);
-        user.ifPresent(us -> us.setSubscribeUserStatus(status));
     }
 
     @Override
