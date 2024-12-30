@@ -1,6 +1,6 @@
 package com.spotifytelegramdeliverymessage.enums;
 
-public enum SubscribeUserStatus {
+public enum SubscribeStatus {
 
     SUBSCRIBE,
     UNSUBSCRIBE;

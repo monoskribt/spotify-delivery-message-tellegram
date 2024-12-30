@@ -4,7 +4,7 @@ package com.spotifytelegramdeliverymessage.service.impl;
 import com.spotifytelegramdeliverymessage.enums.AccountStatus;
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.constant.BotText;
-import com.spotifytelegramdeliverymessage.enums.SubscribeUserStatus;
+import com.spotifytelegramdeliverymessage.enums.SubscribeStatus;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.EmailService;
@@ -58,10 +58,8 @@ public class BotServiceImpl implements BotService {
 
         if(checkCode(enteredConfirmationCode, userService.getCode(id))) {
 
-            Optional<User> user = userService.findById(id);
-            user.get().setSubscribeUserStatus(SubscribeUserStatus.SUBSCRIBE);
-            user.get().setAccountStatus(AccountStatus.CONFIRMED);
-            userService.save(user.get());
+            userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);
+            userService.setUserAccountStatus(id, AccountStatus.CONFIRMED);
 
             sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);
         }

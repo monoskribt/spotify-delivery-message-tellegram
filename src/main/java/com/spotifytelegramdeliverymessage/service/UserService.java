@@ -1,15 +1,19 @@
 package com.spotifytelegramdeliverymessage.service;
 
 
+import com.spotifytelegramdeliverymessage.enums.AccountStatus;
+import com.spotifytelegramdeliverymessage.enums.SubscribeStatus;
 import com.spotifytelegramdeliverymessage.model.User;
-
-import java.util.Optional;
 
 public interface UserService {
 
     void save(User user);
 
-    Optional<User> findById(String id);
+    User findById(String id);
+
+    void  setUserSubscriptionStatus(String id, SubscribeStatus status);
+
+    void setUserAccountStatus(String id, AccountStatus status);
 
     String getCode(String id);
 }
