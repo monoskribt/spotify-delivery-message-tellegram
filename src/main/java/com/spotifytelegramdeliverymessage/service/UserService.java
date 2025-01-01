@@ -19,7 +19,7 @@ public interface UserService {
 
     List<User> getAllSubscribeUsers();
 
-    void deleteUserById(String id);
+    boolean isAlreadyExist(String id);
 
     String getCode(String id);
 }

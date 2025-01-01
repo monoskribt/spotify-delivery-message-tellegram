@@ -57,12 +57,18 @@ public class BotController extends TelegramLongPollingBot {
                 case START -> {
                     botService.sendWelcomeMessage(id, username);
                 }
+                case SUBSCRIBE -> {
+                    botService.subscribe(id, message);
+                }
                 case UNSUBSCRIBE -> {
                     botService.unsubscribe(id, message);
                 }
+                case RELEASE -> {
+                    sendInfoReleases();
+                }
             }
-            if (message.startsWith(SUBSCRIBE)) {
-                botService.subscribe(id, username, message);
+            if (message.startsWith(REGISTER)) {
+                botService.register(id, username, message);
             } else if (message.startsWith(CONFIRM)) {
                 botService.confirmation(id, username, message);
             }
@@ -74,7 +80,7 @@ public class BotController extends TelegramLongPollingBot {
 
 
     @Scheduled(cron = "0 0 8 * * *")
-    public void sendInfoReleases() {
+    private void sendInfoReleases() {
         userService.getAllSubscribeUsers()
                 .forEach(user -> {
                     try {

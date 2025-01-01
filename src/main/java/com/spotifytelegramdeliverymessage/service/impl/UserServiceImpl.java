@@ -47,9 +47,10 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUserById(String id) {
-        userRepository.deleteById(id);
+    public boolean isAlreadyExist(String id) {
+        return userRepository.existsById(id);
     }
+
 
     @Override
     public String getCode(String id) {

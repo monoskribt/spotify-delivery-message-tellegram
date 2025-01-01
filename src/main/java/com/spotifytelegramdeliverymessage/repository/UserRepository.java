@@ -13,6 +13,6 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     List<User> findAllUsersBySubscribeStatus(SubscribeStatus status);
 
-    void deleteById(String id);
+    boolean existsById(String id);
 
 }

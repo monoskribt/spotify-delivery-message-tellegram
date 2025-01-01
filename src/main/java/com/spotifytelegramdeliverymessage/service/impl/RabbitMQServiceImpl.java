@@ -26,6 +26,22 @@ public class RabbitMQServiceImpl implements RabbitMQService {
     public RabbitMQServiceImpl(ObjectMapper objectMapper, BotService botService) {
         this.objectMapper = objectMapper;
         this.botService = botService;
+        addReleasesTest();
+    }
+
+    private void addReleasesTest() {
+        List<AlbumRelease> list1 = new ArrayList<>();
+        List<AlbumRelease> list2 = new ArrayList<>();
+
+        AlbumRelease albumRelease1 = new AlbumRelease("123", "First Release Test-1");
+        AlbumRelease albumRelease2 = new AlbumRelease("456", "Second Release Test-2");
+
+        list1.add(albumRelease1);
+        list2.add(albumRelease2);
+
+        releasesMapWithEmail.put("user@gmail.com", list1);
+        releasesMapWithEmail.put("verificator@gmail.com", list2);
+        releasesMapWithEmail.put("developer.job98@gmail.com", list2);
     }
 
 
