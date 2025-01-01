@@ -1,0 +1,123 @@
+2025-01-01T12:38:24.257+01:00 ERROR 1536 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:40) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T12:41:28.209+01:00 ERROR 1536 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:40) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T12:44:42.134+01:00 ERROR 7016 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:40) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T12:47:08.372+01:00 ERROR 7808 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:41) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T12:50:40.981+01:00 ERROR 4012 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:49) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T12:55:38.409+01:00 ERROR 1800 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:49) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T12:55:38.643+01:00 ERROR 1800 --- [spotify-telegram-delivery-message] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8080 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8080 or configure this application to listen on another port.
+
+2025-01-01T12:57:03.038+01:00 ERROR 15276 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:49) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T13:02:49.498+01:00 ERROR 12880 --- [spotify-telegram-delivery-message] [spotify_message_bot Telegram Executor] o.t.t.u.DefaultBotSession                : Cannot invoke "java.util.List.stream()" because "releaseList" is null
+
+java.lang.NullPointerException: Cannot invoke "java.util.List.stream()" because "releaseList" is null
+	at com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl.sendMessageToUser(RabbitMQServiceImpl.java:49) ~[classes/:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.lambda$onUpdateReceived$0(BotController.java:66) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at com.spotifytelegramdeliverymessage.controller.BotController.onUpdateReceived(BotController.java:64) ~[classes/:na]
+	at java.base/java.util.ArrayList.forEach(ArrayList.java:1596) ~[na:na]
+	at org.telegram.telegrambots.meta.generics.LongPollingBot.onUpdatesReceived(LongPollingBot.java:27) ~[telegrambots-meta-6.5.0.jar:na]
+	at org.telegram.telegrambots.updatesreceivers.DefaultBotSession$HandlerThread.run(DefaultBotSession.java:312) ~[telegrambots-6.5.0.jar:na]
+
+2025-01-01T14:23:00.083+01:00 ERROR 2056 --- [spotify-telegram-delivery-message] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+The dependencies of some of the beans in the application context form a cycle:
+
+┌─────┐
+|  botController defined in file [D:\Developer\Java Projects\work-with-mentor\spotify-telegram-delivery-message\target\classes\com\spotifytelegramdeliverymessage\controller\BotController.class]
+↑     ↓
+|  botServiceImpl defined in file [D:\Developer\Java Projects\work-with-mentor\spotify-telegram-delivery-message\target\classes\com\spotifytelegramdeliverymessage\service\impl\BotServiceImpl.class]
+└─────┘
+
+
+Action:
+
+Relying upon circular references is discouraged and they are prohibited by default. Update your application to remove the dependency cycle between beans. As a last resort, it may be possible to break the cycle automatically by setting spring.main.allow-circular-references to true.
+

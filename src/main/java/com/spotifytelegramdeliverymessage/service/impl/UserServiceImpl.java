@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.function.Consumer;
 
 @Service
@@ -39,6 +39,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void setUserAccountStatus(String id, AccountStatus status) {
         updateUserFunctions(id, user -> user.setAccountStatus(status));
+    }
+
+    @Override
+    public List<User> getAllSubscribeUsers() {
+        return userRepository.findAllUsersBySubscribeStatus(SubscribeStatus.SUBSCRIBE);
+    }
+
+    @Override
+    public void deleteUserById(String id) {
+        userRepository.deleteById(id);
     }
 
     @Override

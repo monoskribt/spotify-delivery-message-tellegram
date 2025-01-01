@@ -17,4 +17,7 @@ public class BotText {
             "Your code is correct and your email has been successfully verified.";
 
     public static final String FAILED_CONFIRMATION_TEXT = "You entered an incorrect code. Please try again.";
+
+    public static final String UNSUBSCRIBED_TEXT =
+            "You have successfully unsubscribed and will no longer receive notifications about new releases.";
 }

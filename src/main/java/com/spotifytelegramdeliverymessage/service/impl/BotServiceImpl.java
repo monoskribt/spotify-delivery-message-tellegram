@@ -16,8 +16,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.Optional;
-
 @Service
 public class BotServiceImpl implements BotService {
 
@@ -30,6 +28,7 @@ public class BotServiceImpl implements BotService {
 
     @Autowired
     private EmailService emailService;
+
 
     @Override
     public void sendWelcomeMessage(String id, String username) throws TelegramApiException {
@@ -53,6 +52,12 @@ public class BotServiceImpl implements BotService {
     }
 
     @Override
+    public void unsubscribe(String id, String message) throws TelegramApiException {
+        userService.deleteUserById(id);
+        sendMessage(id, BotText.UNSUBSCRIBED_TEXT);
+    }
+
+    @Override
     public void confirmation(String id, String username, String message) throws TelegramApiException {
         String enteredConfirmationCode = message.replace(BotCommands.CONFIRM, "").trim();
 
@@ -72,7 +77,8 @@ public class BotServiceImpl implements BotService {
         return codeFromUser.equals(codeFromService);
     }
 
-    private void sendMessage(String id, String text) throws TelegramApiException {
+    @Override
+    public void sendMessage(String id, String text) throws TelegramApiException {
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(id)
                 .parseMode("Markdown")

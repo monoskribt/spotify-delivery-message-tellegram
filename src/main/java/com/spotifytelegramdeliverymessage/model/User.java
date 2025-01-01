@@ -3,6 +3,7 @@ package com.spotifytelegramdeliverymessage.model;
 import com.spotifytelegramdeliverymessage.enums.AccountStatus;
 import com.spotifytelegramdeliverymessage.enums.SubscribeStatus;
 import jakarta.persistence.*;
+import lombok.Getter;
 
 
 @Entity
@@ -36,16 +37,32 @@ public class User {
 
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
     public void setSubscribeStatus(SubscribeStatus subscribeStatus) {
         this.subscribeStatus = subscribeStatus;
+    }
+
+    public SubscribeStatus getSubscribeStatus() {
+        return subscribeStatus;
+    }
+
+    public AccountStatus getAccountStatus() {
+        return accountStatus;
+    }
+
+    public String getCode() {
+        return code;
     }
 
     public void setCode(String code) {
@@ -54,9 +71,5 @@ public class User {
 
     public void setAccountStatus(AccountStatus accountStatus) {
         this.accountStatus = accountStatus;
-    }
-
-    public String getCode() {
-        return code;
     }
 }

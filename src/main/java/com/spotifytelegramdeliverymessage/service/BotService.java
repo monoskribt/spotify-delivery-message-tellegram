@@ -8,6 +8,10 @@ public interface BotService {
 
     void subscribe(String id, String username, String message) throws TelegramApiException;
 
+    void unsubscribe(String id, String message) throws TelegramApiException;
+
     void confirmation(String id, String username, String message) throws TelegramApiException;
+
+    void sendMessage(String id, String text) throws TelegramApiException;
 
 }
