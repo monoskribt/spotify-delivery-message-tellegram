@@ -3,7 +3,6 @@ package com.spotifytelegramdeliverymessage.model;
 import com.spotifytelegramdeliverymessage.enums.AccountStatus;
 import com.spotifytelegramdeliverymessage.enums.SubscribeStatus;
 import jakarta.persistence.*;
-import lombok.Getter;
 
 
 @Entity
