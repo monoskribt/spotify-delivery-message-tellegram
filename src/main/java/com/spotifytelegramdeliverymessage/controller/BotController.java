@@ -83,11 +83,7 @@ public class BotController extends TelegramLongPollingBot {
     private void sendInfoReleases() {
         userService.getAllSubscribeUsers()
                 .forEach(user -> {
-                    try {
-                        rabbitMQService.sendMessageToUser(user.getEmail(), user.getId());
-                    } catch (TelegramApiException e) {
-                        logger.error("Somethings is wrong: {}", e.getMessage(), e);
-                    }
+                    rabbitMQService.sendMessageToUser(user.getEmail(), user.getId());
                 });
     }
 }
