@@ -3,11 +3,14 @@ package com.spotifytelegramdeliverymessage.service.impl;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.spotifytelegramdeliverymessage.controller.BotController;
 import com.spotifytelegramdeliverymessage.dto.AlbumRelease;
 import com.spotifytelegramdeliverymessage.dto.Release;
 import com.spotifytelegramdeliverymessage.exception.SendingMessageException;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.RabbitMQService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
@@ -22,6 +25,7 @@ public class RabbitMQServiceImpl implements RabbitMQService {
     private final BotService botService;
 
     private Map<String, List<AlbumRelease>> releasesMapWithEmail = new HashMap<>();
+    private static final Logger logger = LoggerFactory.getLogger(RabbitMQServiceImpl.class);
 
 
     public RabbitMQServiceImpl(ObjectMapper objectMapper, BotService botService) {
@@ -33,7 +37,7 @@ public class RabbitMQServiceImpl implements RabbitMQService {
     @RabbitListener(queues = {"${rabbitmq.queue}"})
     private void getMessageFromQueue(String message) {
         try {
-            System.out.println("Received message: " + message);
+            logger.info("Received message: {}", message);
             Release release = objectMapper.readValue(message, Release.class);
 
             releasesMapWithEmail.computeIfAbsent(release.getEmail(), rls -> new ArrayList<>())

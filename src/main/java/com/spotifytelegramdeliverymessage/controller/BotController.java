@@ -2,12 +2,10 @@ package com.spotifytelegramdeliverymessage.controller;
 
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
-import com.spotifytelegramdeliverymessage.service.RabbitMQService;
-import com.spotifytelegramdeliverymessage.service.UserService;
+import com.spotifytelegramdeliverymessage.service.ReleaseNotificationService;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -20,17 +18,15 @@ public class BotController extends TelegramLongPollingBot {
 
     private final BotProps botProps;
     private final BotService botService;
-    private final UserService userService;
-    private final RabbitMQService rabbitMQService;
+    private final ReleaseNotificationService releaseNotificationService;
 
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);
 
-    public BotController(BotProps botProps, BotService botService, UserService userService, RabbitMQService rabbitMQService) {
+    public BotController(BotProps botProps, BotService botService, ReleaseNotificationService releaseNotificationService) {
         super(botProps.token());
         this.botProps = botProps;
         this.botService = botService;
-        this.userService = userService;
-        this.rabbitMQService = rabbitMQService;
+        this.releaseNotificationService = releaseNotificationService;
     }
 
     @Override
@@ -64,7 +60,7 @@ public class BotController extends TelegramLongPollingBot {
                     botService.unsubscribe(id, message);
                 }
                 case RELEASE -> {
-                    sendInfoReleases();
+                    releaseNotificationService.sendInfoReleases();
                 }
             }
             if (message.startsWith(REGISTER)) {
@@ -75,15 +71,5 @@ public class BotController extends TelegramLongPollingBot {
         } catch (TelegramApiException e) {
             logger.error("Somethings is wrong: {}", e.getMessage(), e);
         }
-    }
-
-
-
-    @Scheduled(cron = "0 0 8 * * *")
-    private void sendInfoReleases() {
-        userService.getAllSubscribeUsers()
-                .forEach(user -> {
-                    rabbitMQService.sendMessageToUser(user.getEmail(), user.getId());
-                });
     }
 }
