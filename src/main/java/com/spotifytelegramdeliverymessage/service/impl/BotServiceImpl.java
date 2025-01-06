@@ -16,8 +16,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.Optional;
-
 @Service
 public class BotServiceImpl implements BotService {
 
@@ -31,48 +29,71 @@ public class BotServiceImpl implements BotService {
     @Autowired
     private EmailService emailService;
 
+
     @Override
     public void sendWelcomeMessage(String id, String username) throws TelegramApiException {
-        sendMessage(id, BotText.START_TEXT);
+        if(!userService.isAlreadyExist(id)) {
+            sendMessage(id, BotText.START_TEXT);
+        }
     }
 
     @Override
-    public void subscribe(String id, String username, String message) throws TelegramApiException {
-        String email = message.replace(BotCommands.SUBSCRIBE, "").trim();
-        int confirmationCode = emailService.generateConfirmationCode();
+    public void register(String id, String username, String message) throws TelegramApiException {
+        if(!userService.isAlreadyExist(id)) {
+            String email = message.replace(BotCommands.REGISTER, "").trim();
+            int confirmationCode = emailService.generateConfirmationCode();
 
-        User user = new User(id, username);
-        user.setEmail(email);
-        user.setCode(String.valueOf(confirmationCode));
-        userService.save(user);
+            User user = new User(id, username);
+            user.setEmail(email);
+            user.setCode(String.valueOf(confirmationCode));
+            userService.save(user);
 
-        emailService.sendConfirmationEmail(email, confirmationCode);
-        sendMessage(id, BotText.CONFIRMATION_TEXT);
+            emailService.sendConfirmationEmail(email, confirmationCode);
+            sendMessage(id, BotText.CONFIRMATION_TEXT);
 
-        System.out.println(confirmationCode);
+            System.out.println(confirmationCode);
+        } else {
+            sendMessage(id, "You are already register");
+        }
     }
 
     @Override
     public void confirmation(String id, String username, String message) throws TelegramApiException {
         String enteredConfirmationCode = message.replace(BotCommands.CONFIRM, "").trim();
 
-        if(checkCode(enteredConfirmationCode, userService.getCode(id))) {
+        if(!userService.isAlreadyExist(id)) {
+            if(checkCode(enteredConfirmationCode, userService.getCode(id))) {
 
-            userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);
-            userService.setUserAccountStatus(id, AccountStatus.CONFIRMED);
+                userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);
+                userService.setUserAccountStatus(id, AccountStatus.CONFIRMED);
 
-            sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);
+                sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);
+            }
+            else {
+                sendMessage(id, BotText.FAILED_CONFIRMATION_TEXT);
+            }
+        } else {
+            sendMessage(id, "You are already register");
         }
-        else {
-            sendMessage(id, BotText.FAILED_CONFIRMATION_TEXT);
-        }
+    }
+
+    @Override
+    public void subscribe(String id, String message) {
+        userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);
+    }
+
+
+    @Override
+    public void unsubscribe(String id, String message) {
+        userService.setUserSubscriptionStatus(id, SubscribeStatus.UNSUBSCRIBE);
     }
 
     private boolean checkCode(String codeFromUser, String codeFromService) {
         return codeFromUser.equals(codeFromService);
     }
 
-    private void sendMessage(String id, String text) throws TelegramApiException {
+    @Override
+    public void sendMessage(String id, String text) throws TelegramApiException {
         SendMessage sendMessage = SendMessage.builder()
                 .chatId(id)
                 .parseMode("Markdown")

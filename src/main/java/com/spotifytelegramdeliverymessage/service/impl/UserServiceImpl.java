@@ -10,7 +10,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Optional;
+import java.util.List;
 import java.util.function.Consumer;
 
 @Service
@@ -40,6 +40,17 @@ public class UserServiceImpl implements UserService {
     public void setUserAccountStatus(String id, AccountStatus status) {
         updateUserFunctions(id, user -> user.setAccountStatus(status));
     }
+
+    @Override
+    public List<User> getAllSubscribeUsers() {
+        return userRepository.findAllUsersBySubscribeStatus(SubscribeStatus.SUBSCRIBE);
+    }
+
+    @Override
+    public boolean isAlreadyExist(String id) {
+        return userRepository.existsById(id);
+    }
+
 
     @Override
     public String getCode(String id) {

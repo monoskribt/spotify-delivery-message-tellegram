@@ -2,6 +2,7 @@ package com.spotifytelegramdeliverymessage.controller;
 
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
+import com.spotifytelegramdeliverymessage.service.ReleaseNotificationService;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,13 +18,15 @@ public class BotController extends TelegramLongPollingBot {
 
     private final BotProps botProps;
     private final BotService botService;
+    private final ReleaseNotificationService releaseNotificationService;
 
     private static final Logger logger = LoggerFactory.getLogger(BotController.class);
 
-    public BotController(BotProps botProps, BotService botService) {
+    public BotController(BotProps botProps, BotService botService, ReleaseNotificationService releaseNotificationService) {
         super(botProps.token());
         this.botProps = botProps;
         this.botService = botService;
+        this.releaseNotificationService = releaseNotificationService;
     }
 
     @Override
@@ -46,10 +49,22 @@ public class BotController extends TelegramLongPollingBot {
 
 
         try {
-            if (message.startsWith(START)) {
-                botService.sendWelcomeMessage(id, username);
-            } else if (message.startsWith(SUBSCRIBE)) {
-                botService.subscribe(id, username, message);
+            switch (message) {
+                case START -> {
+                    botService.sendWelcomeMessage(id, username);
+                }
+                case SUBSCRIBE -> {
+                    botService.subscribe(id, message);
+                }
+                case UNSUBSCRIBE -> {
+                    botService.unsubscribe(id, message);
+                }
+                case RELEASE -> {
+                    releaseNotificationService.sendInfoReleases();
+                }
+            }
+            if (message.startsWith(REGISTER)) {
+                botService.register(id, username, message);
             } else if (message.startsWith(CONFIRM)) {
                 botService.confirmation(id, username, message);
             }
