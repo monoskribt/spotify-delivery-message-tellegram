@@ -1,21 +1,18 @@
 package com.spotifytelegramdeliverymessage.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class AlbumRelease {
 
+    @JsonProperty("id")
     private String albumId;
+
+    @JsonProperty("name")
     private String albumName;
-
-    public AlbumRelease(String albumId, String albumName) {
-        this.albumId = albumId;
-        this.albumName = albumName;
-    }
-
-    public String getAlbumId() {
-        return albumId;
-    }
-
-    public String getAlbumName() {
-        return albumName;
-    }
-
 }

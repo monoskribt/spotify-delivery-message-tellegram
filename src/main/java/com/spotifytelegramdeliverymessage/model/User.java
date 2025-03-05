@@ -3,10 +3,16 @@ package com.spotifytelegramdeliverymessage.model;
 import com.spotifytelegramdeliverymessage.enums.AccountStatus;
 import com.spotifytelegramdeliverymessage.enums.SubscribeStatus;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 
 @Entity
 @Table(name = "telegram_user")
+@Getter
+@Setter
+@NoArgsConstructor
 public class User {
 
     @Id
@@ -30,45 +36,5 @@ public class User {
     public User(String id, String username) {
         this.id = id;
         this.username = username;
-    }
-
-    public User() {
-
-    }
-
-    public String getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setSubscribeStatus(SubscribeStatus subscribeStatus) {
-        this.subscribeStatus = subscribeStatus;
-    }
-
-    public SubscribeStatus getSubscribeStatus() {
-        return subscribeStatus;
-    }
-
-    public AccountStatus getAccountStatus() {
-        return accountStatus;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public void setAccountStatus(AccountStatus accountStatus) {
-        this.accountStatus = accountStatus;
     }
 }

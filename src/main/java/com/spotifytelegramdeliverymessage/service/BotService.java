@@ -13,7 +13,4 @@ public interface BotService {
     void subscribe(String id, String message);
 
     void unsubscribe(String id, String message);
-
-    void sendMessage(String id, String text) throws TelegramApiException;
-
 }

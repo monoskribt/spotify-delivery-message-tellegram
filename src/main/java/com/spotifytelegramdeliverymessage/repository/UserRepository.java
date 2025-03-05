@@ -14,5 +14,4 @@ public interface UserRepository extends JpaRepository<User, String> {
     List<User> findAllUsersBySubscribeStatus(SubscribeStatus status);
 
     boolean existsById(String id);
-
 }

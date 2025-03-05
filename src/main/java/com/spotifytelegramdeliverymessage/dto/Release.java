@@ -1,27 +1,20 @@
 package com.spotifytelegramdeliverymessage.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.spotifytelegramdeliverymessage.service.impl.RabbitMQServiceImpl;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.List;
 
+@AllArgsConstructor
+@Getter
+@Setter
 public class Release {
 
+    @JsonProperty("email")
     private String email;
 
-    @JsonProperty("release")
+    @JsonProperty("releases")
     private List<AlbumRelease> releaseList;
-
-    public Release(String email, List<AlbumRelease> releaseList) {
-        this.email = email;
-        this.releaseList = releaseList;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public List<AlbumRelease> getReleaseList() {
-        return releaseList;
-    }
 }

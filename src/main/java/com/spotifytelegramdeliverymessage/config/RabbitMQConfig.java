@@ -10,13 +10,10 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class RabbitMQConfig {
 
     private final RabbitMQProps rabbitMQProps;
-
-    public RabbitMQConfig(RabbitMQProps rabbitMQProps) {
-        this.rabbitMQProps = rabbitMQProps;
-    }
 
     @Bean
     public DirectExchange directExchange() {
@@ -33,5 +30,4 @@ public class RabbitMQConfig {
         return BindingBuilder.bind(queue)
                 .to(directExchange).with(rabbitMQProps.routingKey());
     }
-
 }

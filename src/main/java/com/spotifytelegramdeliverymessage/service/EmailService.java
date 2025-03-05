@@ -5,5 +5,4 @@ public interface EmailService {
     int generateConfirmationCode();
 
     void sendConfirmationEmail(String toEmail, int confirmationCode);
-
 }

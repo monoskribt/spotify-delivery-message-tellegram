@@ -1,6 +1,5 @@
 package com.spotifytelegramdeliverymessage.service.impl;
 
-
 import com.spotifytelegramdeliverymessage.enums.AccountStatus;
 import com.spotifytelegramdeliverymessage.constant.BotCommands;
 import com.spotifytelegramdeliverymessage.constant.BotText;
@@ -8,32 +7,24 @@ import com.spotifytelegramdeliverymessage.enums.SubscribeStatus;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.EmailService;
+import com.spotifytelegramdeliverymessage.service.MessageSender;
 import com.spotifytelegramdeliverymessage.service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.bots.AbsSender;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 @Service
+@RequiredArgsConstructor
 public class BotServiceImpl implements BotService {
 
-    @Lazy
-    @Autowired
-    private AbsSender absSender;
-
-    @Autowired
-    private UserService userService;
-
-    @Autowired
-    private EmailService emailService;
-
+    private final UserService userService;
+    private final EmailService emailService;
+    private final MessageSender messageSender;
 
     @Override
     public void sendWelcomeMessage(String id, String username) throws TelegramApiException {
         if(!userService.isAlreadyExist(id)) {
-            sendMessage(id, BotText.START_TEXT);
+            messageSender.sendMessage(id, BotText.START_TEXT);
         }
     }
 
@@ -49,11 +40,11 @@ public class BotServiceImpl implements BotService {
             userService.save(user);
 
             emailService.sendConfirmationEmail(email, confirmationCode);
-            sendMessage(id, BotText.CONFIRMATION_TEXT);
+            messageSender.sendMessage(id, BotText.CONFIRMATION_TEXT);
 
             System.out.println(confirmationCode);
         } else {
-            sendMessage(id, "You are already register");
+            messageSender.sendMessage(id, "You are already register");
         }
     }
 
@@ -67,13 +58,13 @@ public class BotServiceImpl implements BotService {
                 userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);
                 userService.setUserAccountStatus(id, AccountStatus.CONFIRMED);
 
-                sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);
+                messageSender.sendMessage(id, BotText.SUCCESSFULLY_CONFIRMATION_TEXT);
             }
             else {
-                sendMessage(id, BotText.FAILED_CONFIRMATION_TEXT);
+                messageSender.sendMessage(id, BotText.FAILED_CONFIRMATION_TEXT);
             }
         } else {
-            sendMessage(id, "You are already register");
+            messageSender.sendMessage(id, "You are already register");
         }
     }
 
@@ -82,7 +73,6 @@ public class BotServiceImpl implements BotService {
         userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);
     }
 
-
     @Override
     public void unsubscribe(String id, String message) {
         userService.setUserSubscriptionStatus(id, SubscribeStatus.UNSUBSCRIBE);
@@ -90,15 +80,5 @@ public class BotServiceImpl implements BotService {
 
     private boolean checkCode(String codeFromUser, String codeFromService) {
         return codeFromUser.equals(codeFromService);
-    }
-
-    @Override
-    public void sendMessage(String id, String text) throws TelegramApiException {
-        SendMessage sendMessage = SendMessage.builder()
-                .chatId(id)
-                .parseMode("Markdown")
-                .text(text)
-                .build();
-        absSender.execute(sendMessage);
     }
 }

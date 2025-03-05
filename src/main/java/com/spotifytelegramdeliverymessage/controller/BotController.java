@@ -3,9 +3,7 @@ package com.spotifytelegramdeliverymessage.controller;
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.ReleaseNotificationService;
-import lombok.SneakyThrows;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -14,13 +12,12 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import static com.spotifytelegramdeliverymessage.constant.BotCommands.*;
 
 @Component
+@Slf4j
 public class BotController extends TelegramLongPollingBot {
 
     private final BotProps botProps;
     private final BotService botService;
     private final ReleaseNotificationService releaseNotificationService;
-
-    private static final Logger logger = LoggerFactory.getLogger(BotController.class);
 
     public BotController(BotProps botProps, BotService botService, ReleaseNotificationService releaseNotificationService) {
         super(botProps.token());
@@ -34,9 +31,6 @@ public class BotController extends TelegramLongPollingBot {
         return botProps.name();
     }
 
-
-
-    @SneakyThrows
     @Override
     public void onUpdateReceived(Update update) {
         if(!update.hasMessage() || !update.getMessage().hasText()) {
@@ -46,7 +40,6 @@ public class BotController extends TelegramLongPollingBot {
         String message = update.getMessage().getText();
         String id = update.getMessage().getChatId().toString();
         String username = update.getMessage().getChat().getUserName();
-
 
         try {
             switch (message) {
@@ -59,9 +52,6 @@ public class BotController extends TelegramLongPollingBot {
                 case UNSUBSCRIBE -> {
                     botService.unsubscribe(id, message);
                 }
-                case RELEASE -> {
-                    releaseNotificationService.sendInfoReleases();
-                }
             }
             if (message.startsWith(REGISTER)) {
                 botService.register(id, username, message);
@@ -69,7 +59,7 @@ public class BotController extends TelegramLongPollingBot {
                 botService.confirmation(id, username, message);
             }
         } catch (TelegramApiException e) {
-            logger.error("Somethings is wrong: {}", e.getMessage(), e);
+            log.warn("Somethings is wrong: {}", e.getCause(), e);
         }
     }
 }

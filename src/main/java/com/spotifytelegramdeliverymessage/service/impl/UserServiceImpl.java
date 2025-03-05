@@ -6,19 +6,17 @@ import com.spotifytelegramdeliverymessage.exception.UserNotFoundException;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.repository.UserRepository;
 import com.spotifytelegramdeliverymessage.service.UserService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public void save(User user) {
@@ -62,5 +60,4 @@ public class UserServiceImpl implements UserService {
         updateUser.accept(user);
         userRepository.save(user);
     }
-
 }

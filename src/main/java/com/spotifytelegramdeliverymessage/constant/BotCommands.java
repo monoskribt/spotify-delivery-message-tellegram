@@ -11,5 +11,4 @@ public class BotCommands {
     public static final String SUBSCRIBE = "/subscribe";
     public static final String UNSUBSCRIBE = "/unsubscribe";
     public static final String RELEASE = "/release";
-
 }
