@@ -13,6 +13,6 @@ Below is an example of what you will see:
 ![Start Command](images/telegram-notification-bot.png)
 
 ## Links to path of project:
-- Back-end: https://github.com/monoskribt/spotify-service-backend
-- Front-en: https://github.com/monoskribt/spotify-service-frontend
-- Telegram Bot: Currently you are here.
+- Spotify Service API Back-end: https://github.com/monoskribt/spotify-service-backend
+- Spotify Service API Front-en: https://github.com/monoskribt/spotify-service-frontend
+- Spotify Service API Telegram Bot: Currently you are here.
