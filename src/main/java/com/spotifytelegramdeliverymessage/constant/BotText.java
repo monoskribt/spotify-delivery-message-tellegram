@@ -14,7 +14,9 @@ public class BotText {
             Example: /confirm 000000""";
 
     public static final String SUCCESSFULLY_CONFIRMATION_TEXT = "Congratulations! " +
-            "Your code is correct and your email has been successfully verified.";
+            "Your code is correct and your email has been successfully verified. " +
+            "Additionally, you have already been subscribed to notifications for releases. " +
+            "To unsubscribe from notifications for releases, write the command: /unsubscribe";
 
     public static final String FAILED_CONFIRMATION_TEXT =
             "You entered an incorrect code. Please try again.";

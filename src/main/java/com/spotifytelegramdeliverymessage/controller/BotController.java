@@ -2,8 +2,8 @@ package com.spotifytelegramdeliverymessage.controller;
 
 import com.spotifytelegramdeliverymessage.props.BotProps;
 import com.spotifytelegramdeliverymessage.service.BotService;
-import com.spotifytelegramdeliverymessage.service.ReleaseNotificationService;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -17,13 +17,12 @@ public class BotController extends TelegramLongPollingBot {
 
     private final BotProps botProps;
     private final BotService botService;
-    private final ReleaseNotificationService releaseNotificationService;
 
-    public BotController(BotProps botProps, BotService botService, ReleaseNotificationService releaseNotificationService) {
+    public BotController(BotProps botProps,
+                         @Lazy BotService botService) {
         super(botProps.token());
         this.botProps = botProps;
         this.botService = botService;
-        this.releaseNotificationService = releaseNotificationService;
     }
 
     @Override

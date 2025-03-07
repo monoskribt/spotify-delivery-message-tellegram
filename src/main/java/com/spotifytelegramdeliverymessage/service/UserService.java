@@ -15,6 +15,8 @@ public interface UserService {
 
     void  setUserSubscriptionStatus(String id, SubscribeStatus status);
 
+    boolean getUserAccountStatus(String id, AccountStatus status);
+
     void setUserAccountStatus(String id, AccountStatus status);
 
     List<User> getAllSubscribeUsers();

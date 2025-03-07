@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.spotifytelegramdeliverymessage.dto.AlbumRelease;
 import com.spotifytelegramdeliverymessage.dto.Release;
 import com.spotifytelegramdeliverymessage.exception.SendingMessageException;
-import com.spotifytelegramdeliverymessage.service.BotService;
 import com.spotifytelegramdeliverymessage.service.MessageSender;
 import com.spotifytelegramdeliverymessage.service.RabbitMQService;
 import lombok.RequiredArgsConstructor;

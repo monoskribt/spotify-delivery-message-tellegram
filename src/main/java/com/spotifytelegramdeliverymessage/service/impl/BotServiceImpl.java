@@ -52,7 +52,8 @@ public class BotServiceImpl implements BotService {
     public void confirmation(String id, String username, String message) throws TelegramApiException {
         String enteredConfirmationCode = message.replace(BotCommands.CONFIRM, "").trim();
 
-        if(!userService.isAlreadyExist(id)) {
+        if(userService.isAlreadyExist(id) &&
+                userService.getUserAccountStatus(id, AccountStatus.NOT_CONFIRMED)) {
             if(checkCode(enteredConfirmationCode, userService.getCode(id))) {
 
                 userService.setUserSubscriptionStatus(id, SubscribeStatus.SUBSCRIBE);

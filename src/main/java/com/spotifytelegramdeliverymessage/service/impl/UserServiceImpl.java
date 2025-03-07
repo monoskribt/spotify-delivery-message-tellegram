@@ -35,6 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean getUserAccountStatus(String id, AccountStatus status) {
+        return userRepository.findById(id)
+                .map(u -> u.getAccountStatus().equals(status))
+                .orElseThrow(() -> new UserNotFoundException("User is not found with id: " + id));
+    }
+
+    @Override
     public void setUserAccountStatus(String id, AccountStatus status) {
         updateUserFunctions(id, user -> user.setAccountStatus(status));
     }
@@ -48,7 +55,6 @@ public class UserServiceImpl implements UserService {
     public boolean isAlreadyExist(String id) {
         return userRepository.existsById(id);
     }
-
 
     @Override
     public String getCode(String id) {
