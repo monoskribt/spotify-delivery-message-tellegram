@@ -6,19 +6,17 @@ import com.spotifytelegramdeliverymessage.exception.UserNotFoundException;
 import com.spotifytelegramdeliverymessage.model.User;
 import com.spotifytelegramdeliverymessage.repository.UserRepository;
 import com.spotifytelegramdeliverymessage.service.UserService;
-import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Consumer;
 
 @Service
-@AllArgsConstructor
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Override
     public void save(User user) {
@@ -37,6 +35,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public boolean getUserAccountStatus(String id, AccountStatus status) {
+        return userRepository.findById(id)
+                .map(u -> u.getAccountStatus().equals(status))
+                .orElseThrow(() -> new UserNotFoundException("User is not found with id: " + id));
+    }
+
+    @Override
     public void setUserAccountStatus(String id, AccountStatus status) {
         updateUserFunctions(id, user -> user.setAccountStatus(status));
     }
@@ -51,7 +56,6 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsById(id);
     }
 
-
     @Override
     public String getCode(String id) {
         return findById(id).getCode();
@@ -62,5 +66,4 @@ public class UserServiceImpl implements UserService {
         updateUser.accept(user);
         userRepository.save(user);
     }
-
 }

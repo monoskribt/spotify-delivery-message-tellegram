@@ -4,5 +4,4 @@ public enum AccountStatus {
 
     CONFIRMED,
     NOT_CONFIRMED
-
 }
