@@ -14,5 +14,5 @@ Below is an example of what you will see:
 
 ## Links to path of project:
 - Spotify Service API Back-end: https://github.com/monoskribt/spotify-service-backend
-- Spotify Service API Front-en: https://github.com/monoskribt/spotify-service-frontend
+- Spotify Service API Front-end: https://github.com/monoskribt/spotify-service-frontend
 - Spotify Service API Telegram Bot: Currently you are here.
