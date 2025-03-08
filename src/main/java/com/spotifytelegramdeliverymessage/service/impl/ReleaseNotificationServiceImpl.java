@@ -14,12 +14,10 @@ public class ReleaseNotificationServiceImpl implements ReleaseNotificationServic
     private final UserService userService;
     private final RabbitMQService rabbitMQService;
 
-    @Scheduled(cron = "0 0 8 * * *")
+    @Scheduled(cron = "0 0 9 * * *")
     @Override
     public void sendInfoReleases() {
         userService.getAllSubscribeUsers()
-                .forEach(user -> {
-                    rabbitMQService.sendMessageToUser(user.getEmail(), user.getId());
-                });
+                .forEach(user -> rabbitMQService.sendMessageToUser(user.getEmail(), user.getId()));
     }
 }
