@@ -42,15 +42,11 @@ public class BotController extends TelegramLongPollingBot {
 
         try {
             switch (message) {
-                case START -> {
-                    botService.sendWelcomeMessage(id, username);
-                }
-                case SUBSCRIBE -> {
-                    botService.subscribe(id, message);
-                }
-                case UNSUBSCRIBE -> {
-                    botService.unsubscribe(id, message);
-                }
+                case START -> botService.sendWelcomeMessage(id, username);
+
+                case SUBSCRIBE -> botService.subscribe(id, message);
+
+                case UNSUBSCRIBE -> botService.unsubscribe(id, message);
             }
             if (message.startsWith(REGISTER)) {
                 botService.register(id, username, message);
